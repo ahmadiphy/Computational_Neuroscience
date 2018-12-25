@@ -1,7 +1,6 @@
 #include "in.h"
 #include "global_variables.h"
 #include "izhirk.h"
-#include "hire.h"
 #include "matrixf.h"
 #include "regular_net.h"
 using namespace std;
@@ -44,26 +43,15 @@ int main()
     //------------------------------------ Make Network --------------------------------------
     //----------------------------------------------------------------------------------------
     Regular_net rg1;
-    Hire myh;
-    int l=9;
-    int m0=2,ll=pow(2,l);
-    int N=m0*ll;
+    int N=1000;
     Matrixf mf1;
     iMatrix mat1(N,iRow());
-    //rg1.regT1(N,1,mat1);
-    //rg1.regR1(N,0.5,mat1);
-    myh.interModuleNM1(ll,m0,mat1);//sakht module haye shabake
-    myh.intraModuleHMN1(l,m0,mat1,0.25,1);//sakht kole shabake
-    //myh.intraModuleHMNfibolink(l,m0,mat1,0.75,1);//sakht kole shabake
-    mf1.mat_shrink_to_fit(N,mat1);//behineh saziye ram
-    //mf1.CnMatrix(N,mat1);
-    //cin.get();
+    rg1.regT1(N,1,mat1);
     //----------------------------------------------------------------------------------------
     //-------------------------------- info file write ---------------------------------------
     ostringstream info;
     info<<"./data/info.txt";
     ofstream infoPrint(info.str().c_str(),ios_base::binary);
-    //infoPrint<<"."<< endl;
     infoPrint<<"------------------------------------------------------------"<<endl;
     infoPrint<<"--------- Simulation of Izhikevich Neurons on HMN ----------"<<endl;
     infoPrint<<"------------------------------------------------------------"<<endl;
@@ -104,16 +92,12 @@ int main()
         ri=pdist(gen);
         izhi[i].Initialize(ri);
         vdPrint<<i<<" "<<izhi[i].outC.size()<<endl;
-        //cout<<ri<<" "<<izhi[i].D<<endl;
     }
-    //cin.get();
     //----------------------------------------------------------------------------------------
     //-------------------------------------  file writing  -----------------------------------
     //----------------------------------------------------------------------------------------
-    //outData<<"./data/data_activity.dat";
     vuData<<"./data/data_vu.dat";
     stimes<<"./data/stimes_g"<<g<<".dat";
-    //ofstream outPrint(outData.str().c_str(),ios_base::binary);
     ofstream vuPrint(vuData.str().c_str(),ios_base::binary);
     ofstream stPrint(stimes.str().c_str(),ios_base::binary);
     //----------------------------------------------------------------------------------------
@@ -127,38 +111,24 @@ int main()
         cout<<fixed<<step_time<<endl;
         for(int j=0;j<N;++j)
         {
-            //ri=pdist(gen);
             izhi[j].UpdateI();
             izhi[j].Run(step_time);
         }
         //
         for(int j=0;j<N;++j)
         {
-            //if(izhi[j].Spike==1)
-            //{
             for(int k=0;k<izhi[j].outC.size();++k)
             {
                 int tar=izhi[j].outC[k];
-               //cout<<izhi[tar].cashI<<endl;
                 izhi[j].cashI+=g*(izhi[tar].v-izhi[j].v);
-               //cout<<izhi[j].v<<" "<<izhi[tar].v<<" "<<g<<endl;
-               // cout<<izhi[tar].cashI<<endl;
             }
-            //}
-            //outPrint<<izhi[j].Spike<<" ";
-            //cout<<izhi[j].Spike<<" ";
         }
-        //cout<<izhi[10].I<<endl;
-        //outPrint<<endl;
-        //cout<<endl;
         if(i>=190000)
         {
             for(int j=0;j<N;++j)
                 vuPrint<<izhi[j].v<<" ";
             vuPrint<<endl;
         }
-             //if(i>10000)
-             //   cin.get();
     }
     for(int i=0;i<N;++i)
     {
