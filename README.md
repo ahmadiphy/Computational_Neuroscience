@@ -1,4 +1,4 @@
 # Computational_Neuroscience
 Computational_Neuroscience includes c++ and python codes that used for simulation of neurophysics and criticality in barin
 
-hire class is for building hmn networks (hierarchical modular networks).
+this package is for simulation of N Izhikevich Neuron on complex networks(regular network) by solving izhikevich model with Runge-Kutta 4th method.
