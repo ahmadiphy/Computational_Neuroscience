@@ -15,7 +15,7 @@ IzhiRK::IzhiRK()
 //----------------------------------------------------------------------------------------
 //--------------------------   Izhikevich Model v' Function   ----------------------------
 //----------------------------------------------------------------------------------------
-double IzhiRK::fv(double v,double u,double I)
+double IzhiRK::fv(double v,double u,double I)git push -u origin master
 {
     double result=0.04*pow(v,2)+5*v+140-u+I;
     return result;
@@ -143,18 +143,9 @@ void IzhiRK::Run(double step_time)
         {
             v=c;
             u=u+d;
-            //Spike=1;
-            //spikeNumber++;
-            //spikeCon++;
             if(step_time>=10000)
                 spikeTime.push_back(step_time);
-            //cout<<Spike<<" ";
-        }//else
-        //{
-        //    Spike=0;
-        //}
-        //result[0]=v;
-        //result[1]=u;
+        }
     }else
     {
         cout<<"   ERROR! (initial value problem)  "<<endl;
@@ -168,8 +159,6 @@ void IzhiRK::UpdateI()
 {
     I=rI+(cashI/D);
     cashI=0;
-    //cout<<rI<<" "<<I<<endl;
-
 }
 //----------------------------------------------------------------------------------------
 //-------------------------------   Phase of Neuron   ------------------------------------
