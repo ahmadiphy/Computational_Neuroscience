@@ -33,8 +33,8 @@ public:
     void Connect(std::vector<int>  & cv);
     void UpdateI();
     void Run(double step_time);
-    void get_spikeTime();
-    void get_outC_Size();
+    void get_spikeTime(vector<double> &spikeT);
+    int get_outC_Size();
 };
 
 #endif // IZHIRK_H
