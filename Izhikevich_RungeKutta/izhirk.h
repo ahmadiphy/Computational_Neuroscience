@@ -10,11 +10,11 @@ private:
     int state;//chek parameter for initialize
     int Spike,myNum,spikeNumber,spikeCon;
     double v,u,I,rI,D,cashI,phi;//cashI is sum of input
-    //std::vector<int> inC;
-    //std::vector<double> inW;
+    std::vector<int> inC;
+    std::vector<double> inW;
     std::vector<double> spikeTime;
     std::vector<int> outC;
-    //std::vector<double> outW;    
+    std::vector<double> outW;    
 public:
     IzhiRK();
     double fv(double v,double u,double I);
